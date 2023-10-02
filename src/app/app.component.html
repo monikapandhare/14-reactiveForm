@@ -59,10 +59,8 @@
           class="alert alert-danger"
            *ngIf="signUpForm.controls['email'].hasError('pattern')"
            >
-         This is Invalid Email and pattern is
-          {{signUpForm.controls['email'].errors?.['pattern'].requiredPattern}}
-          and Yours Email pattern is
-          {{signUpForm.controls['email'].errors?.['pattern'].actualValue}}
+         This is Invalid Email 
+          
           </p>
           </ng-container>
         </div>
