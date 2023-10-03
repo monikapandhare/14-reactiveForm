@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
+import { PreventCopyPasswordDirective } from './shared/directives/prevent-copy-password.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PreventCopyPasswordDirective
   ],
   imports: [
     BrowserModule,

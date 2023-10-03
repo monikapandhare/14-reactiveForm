@@ -10,7 +10,7 @@
           signUpForm.controls['userName'].touched && 
           signUpForm.controls['userName'].invalid"
           >
-            <p class="alert alert-danger" 
+            <p class="text-danger" 
             *ngIf=
             "signUpForm.controls['userName'].hasError('required')">
               Username is a Mandatory Field.
@@ -21,11 +21,11 @@
           *ngIf="signUpForm.controls['userName'].dirty && 
           signUpForm.controls['userName'].invalid"
           >
-          <p class="alert alert-danger" *ngIf="signUpForm.controls['userName'].hasError('noSpaceError')">
+          <p class="text-danger" *ngIf="signUpForm.controls['userName'].hasError('noSpaceError')">
             {{signUpForm.controls['userName'].errors?.['noSpaceError']}}
           </p>
             <p 
-            class="alert alert-danger"
+            class="text-danger"
              *ngIf="signUpForm.controls['userName'].hasError('minlength')"
              >
               Minimum Length Should be
@@ -34,7 +34,7 @@
               {{signUpForm.controls['userName'].errors?.['minlength'].actualLength}}
             </p>
 
-            <p class="alert alert-danger"  *ngIf="signUpForm.controls['userName'].hasError('maxlength')">
+            <p class="text-danger"  *ngIf="signUpForm.controls['userName'].hasError('maxlength')">
               Maximum Length Should be 
               {{signUpForm.controls['userName'].errors?.['maxlength'].requiredLength}}
               and the actual length should be
@@ -48,7 +48,7 @@
           <input type="text" id="email" formControlName="email" class="form-control">
           <ng-container *ngIf="signUpForm.controls['email'].touched && 
           signUpForm.controls['email'].invalid">
-            <p class="alert alert-danger" *ngIf="signUpForm.controls['email'].hasError('required')">
+            <p class="text-danger" *ngIf="signUpForm.controls['email'].hasError('required')">
               Email is Mandatory Field
             </p>
           </ng-container>
@@ -56,7 +56,7 @@
           signUpForm.controls['email'].invalid">
 
           <p 
-          class="alert alert-danger"
+          class="text-danger"
            *ngIf="signUpForm.controls['email'].hasError('pattern')"
            >
          This is Invalid Email 
@@ -70,13 +70,13 @@
           
           <ng-container *ngIf="f['empId'].touched && 
           f['empId'].invalid">
-            <p class="alert alert-danger" *ngIf="f['empId'].hasError('required')">
+            <p class="text-danger" *ngIf="f['empId'].hasError('required')">
               EmpId is Mandatory Field
             </p>
           </ng-container>
           <ng-container *ngIf="f['empId'].dirty && 
           f['empId'].invalid">
-            <p class="alert alert-danger" *ngIf="f['empId'].hasError('invalidEmp')">
+            <p class="text-danger" *ngIf="f['empId'].hasError('invalidEmp')">
              {{f['empId'].errors?.['invalidEmp']}}
             </p>
           </ng-container>
@@ -89,78 +89,179 @@
               </label>
           </ng-container>
         </div>
+        <!-- <div class="form-group">
+          <label for="passwordName">Enter Your Password*</label>
+          <input type="text"  formControlName="passwordName" id="passwordName"  class="form-control">
+          <ng-container *ngIf="f['passwordName'].touched && f['passwordName'].invalid">
+            <p class="text-danger"
+            *ngIf="f['passwordName'].hasError('required')">
+            Password is a Mandatory field.
+            </p>
+          </ng-container>
+          <ng-container *ngIf="f['passwordName'].dirty && f['passwordName'].invalid">
+            <p class="text-danger"
+            *ngIf="f['passwordName'].hasError('pattern')">
+            Enter Valid Password
+            </p>
+          </ng-container>
+        
+        </div> -->
         <div class="form-group">
+          <label for="passwordName">Enter Your Password*</label>
+          <input type="text" formControlName="passwordName" id="passwordName" class="form-control">
+          <ng-container *ngIf="f['passwordName'].touched && f['passwordName'].invalid">
+            <p class="text-danger" *ngIf="f['passwordName'].hasError('required')">
+                Field Is Mandatory !!!
+            </p>
+          </ng-container>
+          <ng-container *ngIf="f['passwordName'].dirty && f['passwordName'].invalid">
+            <p class="text-danger" *ngIf="f['passwordName'].hasError('pattern')">
+                plz Enter Valid Password
+            </p>
+          </ng-container>
+        </div>
+
+        <!-- <div class="form-group">
           <label for="password">Enter Your Password*</label>
           <input type="text" id="password" formControlName="password" class="form-control">
-        </div>
+          <ng-container *ngIf="f['password'].touched && 
+          f['password'].invalid">
+            <p class="text-danger" *ngIf="f['password'].hasError('required')">
+              Password is Required
+            </p>
+          </ng-container>
+          <ng-container *ngIf="f['password'].dirty && f['password'].invalid">
+            <p class="text-danger" *ngIf="f['password'].hasError('pattern')">
+                    pattern Is Wrong !!
+            </p>
+          </ng-container>
+          <ng-container *ngIf="f['password'].dirty && f['password'].invalid">
+            <p class="text-danger" *ngIf="f['password'].hasError('pattern')">
+              Password must have at least 1 number, 1 special char, 
+              1 lowerCase, 1 upperCase and its minimum length should be 8
+            </p>
+          </ng-container>
+        </div> -->
         <div class="form-group">
           <label for="confirmPassword">Confirm Your Password*</label>
           <input type="text" id="confirmPassword" formControlName="confirmPassword" class="form-control">
+          <ng-container *ngIf="f['confirmPassword'].touched && f['confirmPassword'].invalid">
+            <p class="text-danger" *ngIf="f['confirmPassword'].hasError('required')">
+              Confirm Password Is Required Field
+            </p>
+          </ng-container>
+          <p class="text-danger" *ngIf="f['confirmPassword'].dirty && f['confirmPassword'].invalid ||
+          f['confirmPassword'].value !== f['passwordName'].value
+          ">
+            Password & ConfirmPassword Must be Same
+          </p>
         </div>
+       <div formArrayName="skills">
+          <h3>Skills</h3>
+          <div class="row" *ngFor="let skill of getSkillsArray.controls; let i = index">
+            <div class="col-10">
+              <div class="form-group">
+                  <input type="text" class="form-control"
+                  [formControlName]="i"
+                  >
+                  <ng-container *ngIf="signUpForm.controls['skills'].touched && 
+                  signUpForm.controls['skills'].invalid">
+                  <p class="text-danger" *ngIf="signUpForm.controls['skills'].hasError('required')">
+                    Skills is Mandatory Field
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-2" *ngIf="i > 0">
+                <button mat-fab color="warn"
+                (click)="onRemoveskill(i)"
+                 type="button" 
+                 aria-label="Example icon button with a delete icon">
+                  <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button mat-raised-button color="primary" type="button"
+              [disabled]="getSkillsArray.length >= 5"
+                (click)="onAddSkill()"
+                >
+                Add skill
+              </button>
+              <span *ngIf="getSkillsArray.length >= 5" class="ml-4 text-danger">Add max 5 skills only</span>
+            </div>
+          </div>
+       </div>
 
         <div class="row">
           <div class="col-md-6">
-           <h3> Permanent Address</h3>
-           <div formGroupName="permanantAddress">
-            <select class="form-control"
-             formControlName="countryName"
-              >
-              <option value="">Select Country</option>
-              <option 
-                *ngFor="let country of countrisArray"
-                [value]="country.Country">
-                {{country.Country}}
-              </option>
-            </select>
+            <h4>
+              Permanent Address
+            </h4>
+            <div formGroupName="PermanentAddress">
+              <div class="form-group">
+                <label for="">Select Country</label>
+                <select class="form-control" formControlName="countryName">
+                  <option value="">Select Country</option>
+                  <option 
+                  *ngFor="let country of countrisArray" [value]="country.Country">{{country.Country}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" formControlName="state" id="state" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" formControlName="city" id="city" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="zipCode">ZipCode</label>
+                <input type="text" formControlName="zipCode" id="zipCode" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <mat-checkbox type="checkbox" formControlName="isCurrentAndPerSame">
+                Current Address is same Permanent address
+              </mat-checkbox>
+            </div>
           </div>
         
-            <div class="form-group">
-              <label for="state">State</label>
-              <input type="text" id="state" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="city">City</label>
-              <input type="text" id="city" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="zipCode">zipCode</label>
-              <input type="text" id="zipCode" class="form-control">
-            </div>
-            <div>
-              <input type="checkbox">
-              <small class="small" >
-                Current Address is same as permanant Address
-              </small>
-            </div>
-        </div>
+           
           <div class="col-md-6">
-            <h3 class="heading">Current Address</h3>
-            <div formGroupName="permanantAddress">
-              <select class="form-control"
-               formControlName="countryName"
-                >
-                <option value="">Select Country</option>
-                <option 
-                  *ngFor="let country of countrisArray"
-                  [value]="country.Country">
-                  {{country.Country}}
-                </option>
-              </select>
+            <h3 class="heading">Current Address
+            </h3>
+            <div formGroupName="currentAddress">
+              <div class="form-group">
+                <label for="countryName">Select Country</label>
+                <select class="form-control"
+                 formControlName="countryName"
+                  >
+                  <option value="">Select Country</option>
+                  <option 
+                    *ngFor="let country of countrisArray"
+                    [value]="country.Country">
+                    {{country.Country}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <input type="text"  formControlName="state"  id="state" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text"  formControlName="city"  id="city" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="zipCode">zipCode</label>
+                <input type="text"  formControlName="zipCode" id="zipCode" class="form-control">
+              </div>
             </div>
-            <div class="form-group">
-              <label for="state">State</label>
-              <input type="text" id="state" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="city">City</label>
-              <input type="text" id="city" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="zipCode">zipCode</label>
-              <input type="text" id="zipCode" class="form-control">
-            </div>
+           
           </div>
-        </div>
+       </div>
        
        <div class="text-right">
         <button mat-raised-button type="submit" color="primary"
@@ -168,8 +269,8 @@
        </div>
       </form>
     </div>
-    <!-- <div class="col-md-6">
+    <div class="col-md-6">
       {{signUpForm.value | json}}
-    </div> -->
+    </div>
   </div>
 </div>
